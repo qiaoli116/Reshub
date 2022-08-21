@@ -1,6 +1,6 @@
 {
   "name": "reshub",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Maintain a globa state store for react app",
   "main": "index.js",
   "scripts": {
