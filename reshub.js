@@ -4,7 +4,7 @@ import {useLifeCycle} from 'ql-react-custom-hooks';
 class ReactStateItem {
     constructor({parentId=null, id=null}={}) {
         console.log(`Creating an react state item with ${id}`);
-        this.id = id == null ? crypto.randomUUID() : id;
+        this.id = !Boolean(id) ? crypto.randomUUID() : id;
         this.childrenIdList = {};
         this.attachToParent(parentId);
         this.api = {};
@@ -12,7 +12,7 @@ class ReactStateItem {
     }
     attachToParent = (parentId) => {
         // check if the "parentId" is an element stored in the store.
-        if (parentId != null && ReactStateHub.hasOwnProperty(parentId)) {
+        if (!Boolean(parentId) && ReactStateHub.hasOwnProperty(parentId)) {
             console.log(`attaching ${this.id} to parent ${this.parentId}.`);
             // get the element from store
             let parent = ReactStateHub[parentId];
@@ -25,7 +25,7 @@ class ReactStateItem {
         }
     }
     detachFromParent = () => {
-        if (this.parentId != null) {
+        if (!Boolean(this.parentId)) {
             console.log(`detaching ${this.id} from parent ${this.parentId}.`);
             // remove itself from the parent
             delete this.parentId[this.id];
